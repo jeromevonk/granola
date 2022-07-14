@@ -1,0 +1,126 @@
+/* Truncate*/
+-- TRUNCATE public.expense, public.category RESTART IDENTITY;
+
+INSERT INTO public.category(parent_id, title)
+	VALUES 
+        /* Insert root categories  */
+        (NULL, 'Health'),
+	(NULL, 'Transport'),
+	(NULL, 'Leisure'),
+	(NULL, 'Market'),
+	(NULL, 'Food'),
+	(NULL, 'Household'),
+	(NULL, 'Shopping'),
+	(NULL, 'Travel'),
+	(NULL, 'Car'),
+	(NULL, 'Donations'),
+	(NULL, 'Services'),
+	(NULL, 'Bureaucracy'),
+	(NULL, 'Pets'),
+	(NULL, 'Education'),
+	(NULL, 'Work'),
+	(NULL, 'Other'),
+
+        /* Insert sub categories  */
+        (1, 'Doctors'),
+        (1, 'Dentist'),
+        (1, 'Exams'),
+        (1, 'Drugstore'),
+        (1, 'Manipulated drugs'),
+        (1, 'Body therapies'),
+        (1, 'Pilates'),
+        (1, 'Gym'),
+        (1, 'Psychoanalysis'),
+        (1, 'Covid'),
+        (1, 'Vaccines'),
+        (1, 'Health insurance'),
+        (1, 'Others (health)'),
+
+        (2, 'Fuel'),
+        (2, 'Parking'),
+        (2, 'Ride apps'),
+        (2, 'Toll'),
+        (2, 'Public transport'),
+        (2, 'Bikes and scooters'),
+        (2, 'Others (Transport)'),
+        
+        (3, 'Streaming'),
+        (3, 'Palmeiras'),
+        (3, 'Cinema'),
+        (3, 'Dancing'),
+        (3, 'Night clubs'),
+        (3, 'Sports'),
+        (3, 'Music & instruments'),
+        (3, 'Others (leisure)'),
+
+        (4, 'Supermarket'),
+        (4, 'Street market'),
+        (4, 'Others (market)'),
+        
+        (5, 'Restaurants'),
+        (5, 'Bars'),
+        (5, 'Bakery'),
+        (5, 'Food delivery'),
+        (5, 'Others (food)'),
+        
+        (6, 'Condominium'),
+        (6, 'Furniture and appliances'),
+        (6, 'Bills'),
+        (6, 'Fixes'),
+        (6, 'Cleaning'),
+        (6, 'IPTU'),
+        (6, 'Others (household)'),
+
+        (7, 'Gifts'),
+        (7, 'Electronics'),
+        (7, 'Clothes'),
+        (7, 'Playstation'),
+        (7, 'Games'),
+        (7, 'Books'),
+        (7, 'Glasses'),
+        (7, 'Stationery'),
+        (7, 'Others (shopping)'),
+
+        (8, 'Plane tickets'),
+        (8, 'Hotels'),
+        (8, 'Money exchange'),
+        (8, 'Others (travel)'),
+        
+        (9, 'Scheduled maintenance'),
+        (9, 'Car repairs'),
+        (9, 'Fines'),
+        (9, 'DETRAN'),
+        (9, 'Car insurance'),
+        (9, 'Others (car)'),
+
+        (10, 'Others (donations)'),
+
+        (11, 'Hair'),
+        (11, 'Locksmith'),
+        (11, 'Taylor'),
+        (11, 'Dry cleaner'),
+        (11, 'Notary'),
+        (11, 'Logistics'),
+        (11, 'Legal'),
+        (11, 'Others (services)'),
+
+        (12, 'Bank taxes'),
+        (12, 'Duty'),
+        (12, 'Documents'),
+        (12, 'Others (bureaucracy)'),
+
+        (13, 'Quino'),
+        (13, 'Others (pets)'),
+        
+        (14, 'Developer'),
+        (14, 'Languages'),
+        (14, 'Learning'),
+        (14, 'Others (Education)'),
+
+        (15, 'Others (work)'),
+
+        (16, 'Uncategorized'),
+        (16, 'Others (other)');
+
+/* Select */
+-- SELECT id, parent_id, title FROM public.category;

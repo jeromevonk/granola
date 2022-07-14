@@ -1,0 +1,55 @@
+/* Taken from: https://www.mysqltutorial.org/mysql-adjacency-list-tree/ */
+
+/* Finding all nodes */
+SELECT id, parent_id, title
+FROM category
+
+
+/* Finding the root nodes */
+SELECT id, title
+FROM category
+WHERE parent_id IS NULL;
+
+
+/* Finding children */
+SELECT id, title
+FROM category
+WHERE parent_id != 1;
+
+/* Querying the whole tree  */
+WITH RECURSIVE category_path (id, title, path) AS
+(
+  SELECT id, title, CAST(title as character varying) as path
+    FROM category
+    WHERE parent_id IS NULL
+  UNION ALL
+  SELECT c.id, c.title, CONCAT(cp.path, ' > ', c.title)
+    FROM category_path AS cp JOIN category AS c
+      ON cp.id = c.parent_id
+)
+SELECT * FROM category_path
+ORDER BY path;
+
+/* Querying a sub-tree */
+WITH RECURSIVE category_path (id, title, path) AS
+(
+  SELECT id, title, CAST(title as character varying)  as path
+    FROM category
+    WHERE parent_id = 1
+  UNION ALL
+  SELECT c.id, c.title, CONCAT(cp.path, ' > ', c.title)
+    FROM category_path AS cp JOIN category AS c
+      ON cp.id = c.parent_id
+)
+SELECT * FROM category_path
+ORDER BY path;
+
+/* Querying all categories, with parent titles */
+SELECT c1.id, c1.parent_id, c1.title, c2.title as parent_title
+FROM category c1 
+LEFT JOIN category c2 ON c1.parent_id = c2.id
+
+
+/* Ouput in JSON  */
+SELECT json_agg(json_build_object(title,id)) as output
+from category;

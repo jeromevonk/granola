@@ -1,0 +1,12 @@
+/* Truncate */
+-- TRUNCATE public.users RESTART IDENTITY;
+
+/* Insert */
+INSERT INTO public.users(username, hash)
+	VALUES 
+	('test', '$2a$10$znR0zW6MJNkScrM44MAp9.tuZdZxYQyz8VOstCfzSk1NOTAdWRZ0e'),
+	('another_user', '$2a$10$znR0zW6MJNkScrM44MAp9.tuZdZxYQyz8VOstCfzSk1NOTAdWRZ0e');
+
+
+/* Select */
+-- SELECT * FROM public.users;

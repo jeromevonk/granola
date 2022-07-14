@@ -1,0 +1,21 @@
+-- https://www.mysqltutorial.org/mysql-adjacency-list-tree/
+-- Table: public.category
+
+-- DROP TABLE IF EXISTS public.category;
+
+CREATE TABLE IF NOT EXISTS public.category
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    parent_id integer,
+    title character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT unique_id UNIQUE (id),
+    CONSTRAINT unique_title UNIQUE (title),
+    CONSTRAINT self FOREIGN KEY (parent_id)
+        REFERENCES public.category (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
+
+-- ALTER TABLE IF EXISTS public.category OWNER to postgres;

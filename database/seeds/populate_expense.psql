@@ -1,0 +1,20 @@
+/* Truncate */
+-- TRUNCATE public.expense RESTART IDENTITY;
+
+/* Insert */
+INSERT INTO public.expense(user_id, year, month, day, description, details, category, recurring,  amount_paid, amount_reimbursed )
+	VALUES 
+	(2, 2020, 1, 11, 'Hamburguer', 'McDonalds', 38, false, 10.50, 0 ), 
+	(2, 2020, 2, 5, 'Pizza', 'at friends', 36, false, 40.20, 0 ), 
+	(2, 2020, 3, 19, 'Pub', 'with friends', 37, false, 65.26, 0 ),
+	(2, 2021, 5, 12, 'Physician', null, 14, false, 500, 400 ),
+	(2, 2021, 7, 12, 'Oftalmologist', null, 14, false, 350, 0 ),
+	(2, 2022, 2, null, 'Pilates', null, 19, true, 200, 0 ),
+	(2, 2022, 3, null, 'Pilates', null, 19, true, 200, 0 ),
+	(2, 2022, 4, null, 'Pilates', null, 19, true, 200, 0 ),
+	(2, 2022, 4, null, 'Pilates', null, 19, true, 200, 0 ),
+	(2, 2022, 4, null, 'Pilates', null, 19, true, 200, 0 )
+	;
+
+/* Select */
+-- SELECT * FROM public.expense;

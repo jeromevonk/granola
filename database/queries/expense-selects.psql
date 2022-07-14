@@ -1,0 +1,9 @@
+/* Select expenses*/
+SELECT id, user_id, year, month, day, description, details, recurring, amount_paid, amount_reimbursed, last_modified
+FROM public.expense exp
+WHERE 
+ user_id = 1 
+ -- AND year = 2012 
+ --AND month = 12 
+ AND (description ILIKE '%nou%' or details ILIKE '%nou%')
+ORDER BY id asc;
