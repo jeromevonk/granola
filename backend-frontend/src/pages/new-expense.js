@@ -96,6 +96,22 @@ export default function Index() {
             defaultValue=""
             {...register('details')}
           />
+          <TextField
+            margin="normal"
+            required
+            id="details"
+            label="Amount paid"
+            defaultValue=""
+            type="numeric"
+            {...register('amountPaid')}
+          />
+          <TextField
+            margin="normal"
+            id="amountReimbursed"
+            label="Amount Reimbursed"
+            defaultValue=""
+            {...register('amountReimbursed')}
+          />
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="category-select-label">Category</InputLabel>
             <Select
@@ -127,6 +143,9 @@ export default function Index() {
               <MenuItem value={24}>Doctors</MenuItem>
             </Select>
           </FormControl>
+          <FormGroup sx={{ mt: 0, mb: 2 }}>
+            <FormControlLabel control={<Checkbox {...register('recurring')}/>} label="Recurring" />
+          </FormGroup>
         </Stack>
         <Button
           type="submit"
