@@ -106,7 +106,7 @@ export default function Index() {
               label="Description"
               defaultValue=""
               {...register('description')}
-              />
+            />
             <Divider sx={{ mb: 1, mt: 1}}/>
             <TextField
               margin="normal"
@@ -115,7 +115,7 @@ export default function Index() {
               label="Details"
               defaultValue=""
               {...register('details')}
-              />
+            />
           </Box>
           <Divider sx={{ mb: 1, mt: 1}}/>
           {
