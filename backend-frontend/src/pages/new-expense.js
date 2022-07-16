@@ -12,6 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Divider from '@mui/material/Divider';
 
 import { useForm } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
@@ -61,88 +62,136 @@ export default function Index() {
   return (
     <Container maxWidth="sm">
       <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h5" component="h1" gutterBottom>
           New expense
         </Typography>
+        <Divider sx={{ marginBottom: 2}}/>
         <Stack>
-          <TextField
-            id="date"
-            label="Date"
-            type="date"
-            defaultValue={new Date().toISOString().split('T')[0]}
-            sx={{ width: 220 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            {...register('date')}
-          />
-          <FormGroup sx={{ mt: 0, mb: 2 }}>
-            <FormControlLabel control={<Checkbox {...register('ignoreDay')}/>} label="Ignore day" />
-          </FormGroup>
-          
-          <TextField
-            margin="normal"
-            required
-            id="description"
-            label="Description"
-            defaultValue=""
-            {...register('description')}
-          />
-          <TextField
-            margin="normal"
-            required
-            id="details"
-            label="Details"
-            defaultValue=""
-            {...register('details')}
-          />
-          <TextField
-            margin="normal"
-            required
-            id="details"
-            label="Amount paid"
-            defaultValue=""
-            type="numeric"
-            {...register('amountPaid')}
-          />
-          <TextField
-            margin="normal"
-            id="amountReimbursed"
-            label="Amount Reimbursed"
-            defaultValue=""
-            {...register('amountReimbursed')}
-          />
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="category-select-label">Category</InputLabel>
-            <Select
-              labelId="category-label"
-              id="category"
-              name="category"
-              label="Category"
-              value={mainCategory}
-              onChange={handleChange}
-            >
-              <MenuItem value={1}>Ten</MenuItem>
-              <MenuItem value={2}>Twenty</MenuItem>
-              <MenuItem value={3}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="subcategory-select-label">Sub-category</InputLabel>
-            <Select
-              labelId="subcategory-label"
-              id="subcategory"
-              name="subcategory"
-              label="Sub-category"
-              value={subCategory}
-              {...register('subcategory')}
-              onChange={handleChange}
-            >
-              <MenuItem value={22}>Palmeiras</MenuItem>
-              <MenuItem value={23}>Food</MenuItem>
-              <MenuItem value={24}>Doctors</MenuItem>
-            </Select>
-          </FormControl>
+          {
+            /* 
+            // ----------------------------------------
+            // Date
+            // ----------------------------------------
+            */
+          }
+          <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-start">
+            <TextField
+              id="date"
+              label="Date"
+              type="date"
+              defaultValue={new Date().toISOString().split('T')[0]}
+              sx={{ width: 180 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              {...register('date')}
+            />
+            <FormGroup>
+              <FormControlLabel control={<Checkbox {...register('ignoreDay')}/>} label="Ignore day" />
+            </FormGroup>
+          </Stack>
+          <Divider sx={{ mb: 1, mt: 1}}/>
+          {
+            /* 
+            // ----------------------------------------
+            // Description and details
+            // ----------------------------------------
+            */
+          }
+          <Box>
+            <TextField
+              margin="normal"
+              required
+              id="description"
+              label="Description"
+              defaultValue=""
+              {...register('description')}
+              />
+            <Divider sx={{ mb: 1, mt: 1}}/>
+            <TextField
+              margin="normal"
+              required
+              id="details"
+              label="Details"
+              defaultValue=""
+              {...register('details')}
+              />
+          </Box>
+          <Divider sx={{ mb: 1, mt: 1}}/>
+          {
+            /* 
+            // ----------------------------------------
+            // Amount paid and reimbursed
+            // ----------------------------------------
+            */
+          }
+          <Stack direction="row" spacing={2} alignItems="baseline" justifyContent="flex-start">
+            <TextField
+              margin="normal"
+              required
+              id="details"
+              label="Amount paid"
+              defaultValue="" 
+              inputProps={{ inputMode: 'numeric' }}
+              {...register('amountPaid')}
+            />
+            <TextField
+              margin="normal"
+              id="amountReimbursed"
+              label="Amount Reimbursed"
+              defaultValue=""
+              inputProps={{ inputMode: 'numeric' }}
+              {...register('amountReimbursed')}
+            />
+          </Stack>
+          <Divider sx={{ mb: 1, mt: 1}}/>
+          {
+            /* 
+            // ----------------------------------------
+            // Category
+            // ----------------------------------------
+            */
+          }
+          <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-around">
+            <FormControl variant="standard" sx={{ m: 1, minWidth: '40%' }}>
+              <InputLabel id="category-select-label">Category</InputLabel>
+              <Select
+                labelId="category-label"
+                id="category"
+                name="category"
+                label="Category"
+                value={mainCategory}
+                onChange={handleChange}
+              >
+                <MenuItem value={1}>Ten</MenuItem>
+                <MenuItem value={2}>Twenty</MenuItem>
+                <MenuItem value={3}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: '50%' }}>
+              <InputLabel id="subcategory-select-label">Sub-category</InputLabel>
+              <Select
+                labelId="subcategory-label"
+                id="subcategory"
+                name="subcategory"
+                label="Sub-category"
+                value={subCategory}
+                {...register('subcategory')}
+                onChange={handleChange}
+              >
+                <MenuItem value={22}>Palmeiras</MenuItem>
+                <MenuItem value={23}>Food</MenuItem>
+                <MenuItem value={24}>Doctors</MenuItem>
+              </Select>
+            </FormControl>
+          </Stack>
+          {
+            /* 
+            // ----------------------------------------
+            // Recurring  
+            // ----------------------------------------
+            */
+          }
           <FormGroup sx={{ mt: 0, mb: 2 }}>
             <FormControlLabel control={<Checkbox {...register('recurring')}/>} label="Recurring" />
           </FormGroup>

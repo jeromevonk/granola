@@ -187,12 +187,13 @@ const ResponsiveAppBar = () => {
           {/* 
             // ----------------------------------------
             // Nav Menu
-            //----------------------------------------
+            // ----------------------------------------
             // Show only for xs - extra small devices
             // (portrait phones, less than 576px)
             // https://mui.com/system/display/
-            //----------------------------------------
-            */}
+            // ----------------------------------------
+            */
+          }
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -253,11 +254,12 @@ const ResponsiveAppBar = () => {
           {/* 
             // ----------------------------------------
             // Pages on the app bar
-            //----------------------------------------
+            // ----------------------------------------
             // Show for md (medium devices) and bigger
             // https://mui.com/system/display/
-            //----------------------------------------
-            */}
+            // ----------------------------------------
+            */
+          }
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -270,13 +272,14 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          {/* 
+          { /* 
             // ----------------------------------------
             // Search fields
-            //----------------------------------------
+            // ----------------------------------------
             // TODO https://mui.com/material-ui/react-app-bar/
-            //----------------------------------------
-            */}
+            // ----------------------------------------
+            */
+          }
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Search>
               <SearchIconWrapper>
@@ -289,11 +292,12 @@ const ResponsiveAppBar = () => {
             </Search>
           </Box>
 
-          {/* 
-          // ----------------------------------------
-          // User menu - always show
-          //----------------------------------------
-          */}
+          { /* 
+            // ----------------------------------------
+            // User menu - always show
+            // ----------------------------------------
+            */
+          }
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
