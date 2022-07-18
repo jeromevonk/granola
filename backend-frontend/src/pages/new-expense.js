@@ -15,8 +15,8 @@ import Select from '@mui/material/Select';
 import Divider from '@mui/material/Divider';
 
 import { useForm } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as Yup from 'yup';
+
+import { categoryService, expenseService } from 'src/services';
 
 export default function Index() {
 
@@ -24,21 +24,66 @@ export default function Index() {
   const { register, handleSubmit } = useForm();
 
   function onSubmit(data) {
-    /*return userService.login(username, password)
-      .then(() => {
-        // get return url from query parameters or default to '/'
-        const returnUrl = router.query.returnUrl || '/';
-        router.push(returnUrl);
+    const parsedDate = data.date.split("-");
+
+    const expense = {
+      year: Number(parsedDate[0]),
+      month: Number(parsedDate[1]),
+      day: data.ignoreDay ? null : Number(parsedDate[2]),
+      description: data.description,
+      details: data.details,
+      amountPaid: Number(data.amountPaid),
+      amountReimbursed: Number(data.amountReimbursed),
+      category: Number(data.subCategory),
+      recurring: true
+    };
+    
+    return expenseService.createNewExpense(expense)
+      .then((res) => {
+        console.log(res);
       })
-      .catch(alertService.error); // TODO mostrar erro corretamente
-      */
-    console.log("Submit!");
-    console.log(data);
-    return;
   }
 
-  const [mainCategory, setMainCategory] = React.useState(1);
-  const [subCategory, setSubCategory] = React.useState(22);
+  // States
+  const [selectedMainCat, setMainCategory] = React.useState(1);
+  const [selectedSubCat, setSubCategory] = React.useState(22);
+  const [categories, setCategories] = React.useState([]);
+
+  // Effects
+  React.useEffect(() => {
+    categoryService.getCategories().then(x => setCategories(x));
+  }, []);
+
+  const getMainCategories = () => {
+    const mainCategories = []
+    for (const item of categories) {
+      if (item.parentId === null) {
+        mainCategories.push({
+          name: item.title,
+          id: item.id
+        });
+      }
+    }
+
+    console.log(`Found ${mainCategories.length} main categories`);
+    return mainCategories;
+  }
+
+  const getSubCategories = (mainCategoryId) => {
+    const subCategories = [];
+
+    for (const item of categories) {
+      if (item.parentId === mainCategoryId) {
+        subCategories.push({
+          name: item.title,
+          id: item.id
+        });
+      }
+    }
+
+    console.log(`Found ${subCategories.length} sub categories for main category id=${mainCategoryId}`);
+    return subCategories;
+  }
 
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -129,7 +174,7 @@ export default function Index() {
             <TextField
               margin="normal"
               required
-              id="details"
+              id="amountPaid"
               label="Amount paid"
               defaultValue="" 
               inputProps={{ inputMode: 'numeric' }}
@@ -160,28 +205,32 @@ export default function Index() {
                 id="category"
                 name="category"
                 label="Category"
-                value={mainCategory}
+                value={selectedMainCat}
                 onChange={handleChange}
               >
-                <MenuItem value={1}>Ten</MenuItem>
-                <MenuItem value={2}>Twenty</MenuItem>
-                <MenuItem value={3}>Thirty</MenuItem>
+                { // Get the main categories
+                  getMainCategories().map( (category) => (
+                    <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                  ))
+                }
               </Select>
             </FormControl>
             <FormControl variant="standard" sx={{ m: 1, minWidth: '50%' }}>
               <InputLabel id="subcategory-select-label">Sub-category</InputLabel>
               <Select
-                labelId="subcategory-label"
-                id="subcategory"
-                name="subcategory"
+                labelId="subCategory-label"
+                id="subCategory"
+                name="subCategory"
                 label="Sub-category"
-                value={subCategory}
-                {...register('subcategory')}
+                value={selectedSubCat}
+                {...register('subCategory')}
                 onChange={handleChange}
               >
-                <MenuItem value={22}>Palmeiras</MenuItem>
-                <MenuItem value={23}>Food</MenuItem>
-                <MenuItem value={24}>Doctors</MenuItem>
+                { // Get the sub categories for selected main category
+                  getSubCategories(selectedMainCat).map( (category) => (
+                    <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                  ))
+                }
               </Select>
             </FormControl>
           </Stack>

@@ -23,14 +23,6 @@ services:
       - db
     networks:
       - backoffice
-  grafana:
-    image: grafana/grafana-oss
-    ports: 
-      - 8081:3000
-    depends_on:
-      - db
-    networks:
-      - backoffice
 networks:
   backend:
   backoffice:
