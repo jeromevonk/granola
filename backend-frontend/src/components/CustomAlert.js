@@ -2,23 +2,23 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
-import {Alert as MuiAlert} from '@mui/material/Alert';
+import { Alert } from '@mui/material/Alert';
 
 import { alertService, AlertType } from 'src/services';
 
-export { Alert };
+export { CustomAlert };
 
-Alert.propTypes = {
+CustomAlert.propTypes = {
   id: PropTypes.string,
   fade: PropTypes.bool
 };
 
-Alert.defaultProps = {
+CustomAlert.defaultProps = {
   id: 'default-alert',
   fade: true
 };
 
-function Alert({ id, fade }) {
+function CustomAlert({ id, fade }) {
   const router = useRouter();
   const [alerts, setAlerts] = useState([]);
 
@@ -109,7 +109,8 @@ function Alert({ id, fade }) {
           <div key={index} className={cssClasses(alert)}>
             <a className="close" onClick={() => removeAlert(alert)}>&times;</a>
             <span dangerouslySetInnerHTML={{ __html: alert.message }}></span>
-            <Alert severity="success">{alert} babaab</Alert>
+            <CustomAlert severity="success">{alert} babaab</CustomAlert>
+            {/* <Alert>banana</Alert> */}
           </div>
         )}
       </div>

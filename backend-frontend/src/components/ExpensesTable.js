@@ -62,18 +62,6 @@ const rows = [
 
 const headCells = [
   {
-    id: 'id',
-    numeric: false,
-    disablePadding: true,
-    label: 'ID',
-  },
-  {
-    id: 'month',
-    numeric: false,
-    disablePadding: true,
-    label: 'Month',
-  },
-  {
     id: 'day',
     numeric: false,
     disablePadding: true,
@@ -99,7 +87,7 @@ const headCells = [
   },
 ];
 
-function EnhancedTableHead(props) {
+function ExpensesTableHead(props) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
@@ -146,7 +134,7 @@ function EnhancedTableHead(props) {
   );
 }
 
-EnhancedTableHead.propTypes = {
+ExpensesTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
@@ -155,7 +143,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = (props) => {
+const ExpensesTableToolbar = (props) => {
   const { numSelected } = props;
 
   return (
@@ -185,7 +173,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Expenses from MM / YYYY
+          {props.month}
         </Typography>
       )}
 
@@ -200,11 +188,11 @@ const EnhancedTableToolbar = (props) => {
   );
 };
 
-EnhancedTableToolbar.propTypes = {
+ExpensesTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function ExpensesTable(props) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('month');
   const [selected, setSelected] = React.useState([]);
@@ -264,14 +252,14 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <ExpensesTableToolbar numSelected={selected.length} month={props.month}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={'small'}
           >
-            <EnhancedTableHead
+            <ExpensesTableHead
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -305,16 +293,6 @@ export default function EnhancedTable() {
                           }}
                         />
                       </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        
-                      >
-                        {row.id}
-                      </TableCell>
-                      <TableCell align="center">{row.month}</TableCell>
                       <TableCell align="center">{row.day}</TableCell>
                       <TableCell align="left">{row.description}</TableCell>
                       <TableCell align="left">{row.category}</TableCell>

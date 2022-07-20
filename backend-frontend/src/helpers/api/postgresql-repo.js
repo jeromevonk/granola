@@ -24,7 +24,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 // ------------------------------------------
 async function getCategories() {
   return knex
-    .select('c1.id', 'c1.parent_id', 'c1.title', 'c2.title as parent_title')
+    .select('c1.id', 'c1.parent_id', 'c1.title')
     .from({c1: 'category'})
     .leftJoin({c2: 'category'}, 'c1.parent_id', '=', 'c2.id');
 }

@@ -42,7 +42,7 @@ INSERT INTO public.category(parent_id, title)
         (2, 'Toll'),
         (2, 'Public transport'),
         (2, 'Bikes and scooters'),
-        (2, 'Others (Transport)'),
+        (2, 'Others (transport)'),
         
         (3, 'Streaming'),
         (3, 'Palmeiras'),
@@ -115,7 +115,7 @@ INSERT INTO public.category(parent_id, title)
         (14, 'Developer'),
         (14, 'Languages'),
         (14, 'Learning'),
-        (14, 'Others (Education)'),
+        (14, 'Others (education)'),
 
         (15, 'Others (work)'),
 

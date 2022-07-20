@@ -10,7 +10,7 @@ import theme from '../theme';
 import createEmotionCache from '../createEmotionCache';
 
 import { userService } from 'src/services';
-import { Alert } from 'src/components/Alert';
+import { CustomAlert } from 'src/components/CustomAlert';
 import ResponsiveAppBar from 'src/components/ResponsiveAppBar';
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -70,7 +70,7 @@ export default function MyApp(props) {
         <CssBaseline />
         <div>
           <ResponsiveAppBar />
-          <Alert />
+          <CustomAlert />
           {authorized &&
             <Component {...pageProps} />
           }
