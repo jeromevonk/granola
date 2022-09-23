@@ -1,4 +1,4 @@
-# granola
+# Granola
 
 ![](docs/screencast_full.gif)
 
