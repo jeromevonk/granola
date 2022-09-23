@@ -1,0 +1,53 @@
+CREATE TABLE IF NOT EXISTS public.expense
+(
+  last_modified timestamp without time zone DEFAULT now(),
+  id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+  user_id integer NOT NULL,
+  category integer NOT NULL,
+  year smallint NOT NULL,
+  month smallint NOT NULL,
+  day smallint,
+  recurring boolean DEFAULT false,
+  amount_paid numeric(7,2) NOT NULL,
+  amount_reimbursed numeric(7,2) NOT NULL DEFAULT 0,
+  description character varying(70) COLLATE pg_catalog."default" NOT NULL,
+  details character varying(70) COLLATE pg_catalog."default",
+  CONSTRAINT expense_pkey PRIMARY KEY (id),
+  CONSTRAINT expense_category_fkey FOREIGN KEY (category)
+    REFERENCES public.category (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT expense_user_id_fkey FOREIGN KEY (user_id)
+    REFERENCES public.users (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT amount_paid CHECK (amount_reimbursed <= amount_paid),
+  CONSTRAINT description CHECK (length(description::text) > 2),
+  CONSTRAINT valid_day CHECK (day >= 1 AND day <= 31),
+  CONSTRAINT valid_month CHECK (month >= 1 AND month <= 12),
+  CONSTRAINT valid_year CHECK (year > 2011 AND year < 2050)
+)
+
+TABLESPACE pg_default;
+
+-- Index: year
+CREATE INDEX IF NOT EXISTS year
+    ON public.expense USING btree
+    (year ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+-- Trigger
+CREATE FUNCTION sync_lastmod() RETURNS trigger AS $$
+BEGIN
+  NEW.last_modified := NOW();
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER
+  sync_lastmod
+BEFORE UPDATE ON
+  expense
+FOR EACH ROW EXECUTE PROCEDURE
+  sync_lastmod();    

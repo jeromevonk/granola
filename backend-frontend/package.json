@@ -1,0 +1,40 @@
+{
+    "name": "granola-backend-frontend",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+    },
+    "dependencies": {
+        "@emotion/cache": "latest",
+        "@emotion/react": "latest",
+        "@emotion/server": "latest",
+        "@emotion/styled": "latest",
+        "@hookform/resolvers": "^2.9.3",
+        "@mui/icons-material": "latest",
+        "@mui/material": "latest",
+        "@mui/x-date-pickers": "^5.0.0-beta.2",
+        "bcryptjs": "^2.4.3",
+        "date-fns": "^2.29.1",
+        "express-jwt": "^7.7.5",
+        "jsonwebtoken": "^8.5.1",
+        "knex": "^2.1.0",
+        "next": "latest",
+        "pg": "^8.7.3",
+        "prop-types": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "react-google-charts": "^4.0.0",
+        "react-hook-form": "^7.33.1",
+        "rxjs": "^7.5.5",
+        "yup": "^0.32.11"
+    },
+    "devDependencies": {
+        "eslint": "latest",
+        "eslint-config-next": "latest"
+    }
+}

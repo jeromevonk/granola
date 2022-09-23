@@ -1,0 +1,22 @@
+INSERT INTO public.category(user_id, parent_id, title)
+	VALUES 
+
+  /* Insert root categories */
+  (1, NULL, 'Health'),
+  (1, NULL, 'Travel'),
+  (1, NULL, 'Food'),
+  (1, NULL, 'Shopping'),
+
+  /* Insert sub categories */
+  (1, 1, 'Doctors'),
+  (1, 1, 'Health insurance'),
+
+  (1, 2, 'Hotels'),
+  (1, 2, 'Tickets'),
+
+  (1, 3, 'Restaurants'),
+  (1, 3, 'Food delivery'),
+  
+  (1, 4, 'Gifts'),
+  (1, 4, 'Clothes')
+;

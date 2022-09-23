@@ -1,0 +1,721 @@
+{
+	"info": {
+		"_postman_id": "228d7a7b-d87b-4204-a978-20d853dcd753",
+		"name": "Granola API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21027402"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/categories",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parentId\": 103,\n    \"title\": \"example\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/categories",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit title",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Shopping\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/categories/:id",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "104"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/categories/:id",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "114"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"sample\",\n    \"password\": \"-------\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/users/authenticate",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"users",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"someone\",\n    \"password\": \"------\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/users/register",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/users",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "Get all expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get expense by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses?id=2970",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2970"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search for expense",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses?search=hotel",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "hotel"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get expenses for a year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses/:year",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								":year"
+							],
+							"variable": [
+								{
+									"key": "year",
+									"value": "2022"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get expenses for a month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses/:year/:month?",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								":year",
+								":month"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							],
+							"variable": [
+								{
+									"key": "year",
+									"value": "2022"
+								},
+								{
+									"key": "month",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list of years with expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses/years",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								"years"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert expense",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"lastInserted\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"year\": 2022,\n    \"month\": 12,\n    \"day\": null,\n    \"description\": \"Test\",\n    \"details\": \"via Postman\",\n    \"amountPaid\": 222,\n    \"amountReimbursed\": 22,\n    \"category\": 13,\n    \"recurring\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/expenses/",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copy recurring to next month",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"lastInserted\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"year\": 2021,\n    \"month\": 12, \n    \"keepAmounts\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/expenses/recurring",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								"recurring"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update expense",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"year\": 2023,\n    \"month\": 8,\n    \"day\": 23,\n    \"description\": \"Update\",\n    \"details\": \"via API\",\n    \"amountPaid\": 500,\n    \"amountReimbursed\": 321,\n    \"category\": 12,\n    \"recurring\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/expenses/:id",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastInserted}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete expense",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/expenses/:id",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastInserted}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete multiple expenses",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[100, 200, 300, 400, 500, 600, 700, 800, 900, 14, 15]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/expenses",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Get status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/status",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"item": [
+				{
+					"name": "Evolution per year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/stats/year-evolution?mainCategory=13",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"stats",
+								"year-evolution"
+							],
+							"query": [
+								{
+									"key": "mainCategory",
+									"value": "13"
+								},
+								{
+									"key": "subCategory",
+									"value": "45",
+									"disabled": true
+								},
+								{
+									"key": "startYear",
+									"value": "2014",
+									"disabled": true
+								},
+								{
+									"key": "endYear",
+									"value": "2018",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evolution per month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/stats/month-evolution",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"stats",
+								"month-evolution"
+							],
+							"query": [
+								{
+									"key": "mainCategory",
+									"value": "13",
+									"disabled": true
+								},
+								{
+									"key": "subCategory",
+									"value": "25",
+									"disabled": true
+								},
+								{
+									"key": "startYear",
+									"value": "2013",
+									"disabled": true
+								},
+								{
+									"key": "endYear",
+									"value": "2013",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category report per year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/stats/category-report?startYear=2022&endYear=2022&reportType=1",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"stats",
+								"category-report"
+							],
+							"query": [
+								{
+									"key": "startYear",
+									"value": "2022"
+								},
+								{
+									"key": "endYear",
+									"value": "2022"
+								},
+								{
+									"key": "reportType",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

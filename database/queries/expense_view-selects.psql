@@ -1,0 +1,65 @@
+/* Select expenses*/
+SELECT user_id, year, month, day, category, recurring, amount_spent
+FROM public.expense_view exp;
+-- WHERE year = 2020
+-- AND month = 2
+
+
+/* Total amount per category */
+SELECT category, cat.title, SUM(amount_spent) as sum 
+FROM public.expense_view exp
+JOIN public.category cat on exp.category = cat.id
+WHERE user_id = 2
+-- AND year = 2022
+-- AND month = 2 
+GROUP BY category, cat.title
+ORDER BY sum desc;
+
+
+/* Group per recurring */
+SELECT year, month, recurring, SUM(amount_spent) as sum 
+FROM public.expense_view exp
+WHERE user_id = 1
+and year = 2022
+GROUP BY  year, month, recurring
+ORDER BY year, month, recurring;
+
+/* Evolution*/
+SELECT year, month, SUM(amount_spent) as sum 
+FROM public.expense_view exp 
+-- join category cat on exp.category = cat.id
+WHERE user_id = 1
+and year BETWEEN 2014 and 2015
+-- and category = 37
+-- and cat.parent_id = 3
+GROUP BY  year, month
+ORDER BY year, month;
+
+/* Report type = mainCategory*/
+SELECT year, month, parent_id as category, SUM(amount_spent) as sum 
+FROM public.expense_view exp 
+join category cat on exp.category = cat.id
+WHERE exp.user_id = 1
+and year BETWEEN 2022 and 2022
+GROUP BY  year, month, parent_id
+ORDER BY year, month;
+
+/* Report type = subCategory*/
+SELECT year, month, category, SUM(amount_spent) as sum 
+FROM public.expense_view exp 
+join category cat on exp.category = cat.id
+WHERE exp.user_id = 1
+and year BETWEEN 2022 and 2022
+GROUP BY  year, month, category
+ORDER BY year, month;
+
+
+/* Report type = detailed*/
+SELECT year, month, category, SUM(amount_spent) as sum 
+FROM public.expense_view exp 
+join category cat on exp.category = cat.id
+WHERE exp.user_id = 1
+and parent_id = 101
+and year BETWEEN 2022 and 2022
+GROUP BY  year, month, category
+ORDER BY year, month;

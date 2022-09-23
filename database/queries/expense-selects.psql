@@ -1,0 +1,32 @@
+/* Select expenses */
+SELECT id, user_id, year, month, day, description, details, recurring, amount_paid, amount_reimbursed, last_modified
+FROM public.expense exp
+WHERE 
+ user_id = 1 
+ -- AND year = 2012 
+ --AND month = 12 
+ AND (description ILIKE '%nou%' or details ILIKE '%nou%')
+ORDER BY id asc;
+
+/* Get years with expenses */
+SELECT year
+FROM public.expense exp
+WHERE user_id = 1 
+GROUP BY year
+ORDER BY year asc;
+
+/* Copy recurring expenses for next month*/
+INSERT INTO expense(user_id, year, month, day, description, details, category, recurring,  amount_paid, amount_reimbursed) 
+	SELECT user_id, 
+			CASE WHEN month = 12 THEN year+1 ELSE year END,
+			CASE WHEN month = 12 THEN 1 ELSE month+1 END,
+			day, 
+			description, 
+			details, 
+			category, 
+			recurring, 
+			amount_paid, 
+			amount_reimbursed
+	FROM public.expense
+	WHERE user_id = 2 AND year = 2022 AND month = 8 AND recurring = true
+;

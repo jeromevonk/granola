@@ -1,0 +1,11 @@
+CREATE OR REPLACE VIEW public.expense_view
+AS
+SELECT 
+  expense.user_id,
+  expense.year,
+  expense.month,
+  expense.day,
+  expense.category,
+  expense.recurring,
+  COALESCE(expense.amount_paid, 0::numeric) - COALESCE(expense.amount_reimbursed, 0::numeric) AS amount_spent
+FROM expense;
