@@ -21,6 +21,8 @@ function getCustomMonthInitials(monthId, isLarge) {
 }
 
 function parseDate(dateString) {
-  const parsed = dateString.split('/');
+  // This will parse dates of the following forms:
+  // YYYY-MM-DD and YYYY/MM/DD
+  const parsed = dateString.split(/[-\/]/);
   return { year: parsed[0], month: parsed[1] }
 }

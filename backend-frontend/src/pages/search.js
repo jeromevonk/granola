@@ -6,7 +6,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { useRouter, withRouter } from 'next/router'
 import ExpensesTable from '../components/ExpensesTable';
 import { expenseService, alertService } from 'src/services';
-import { getCategoryTitles } from 'src/helpers'
+import { getCategoryTitles, parseDate } from 'src/helpers'
 import { AppContext } from 'src/pages/_app';
 
 function Search(props) {
@@ -70,6 +70,11 @@ function Search(props) {
     } else if (action === 'edit' || action === 'duplicate') {
       // Find expense (there should be only 1 selected, so use first position of the list)
       const exp = findExpense(selected[0]);
+
+      // Add month and year
+      const parsed = parseDate(exp.date);
+      exp.year = parsed.year;
+      exp.month = parsed.month;
 
       if (action === 'duplicate') {
         // Push to new expense page with expense data
