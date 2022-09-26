@@ -20,7 +20,7 @@ This app **will not** automatically integrate with your bank and retrieve your e
 
 * Database in [PostgreSQL](https://www.postgresql.org/)
 * Next.js for frontend and backend.
-  * [Material UI](https://mui.com): starting point was [this example](https://github.com/mui/material-ui/tree/master/examples/nextj).
+  * [Material UI](https://mui.com): starting point was [this example](https://github.com/mui/material-ui/tree/master/examples/nextjs).
   * Charts powered by [Google Charts](https://developers.google.com/chart) and [this library](https://www.react-google-charts.com/).
 
 ### Where is it hosted?
