@@ -1,20 +1,20 @@
-/* Taken from: https://www.mysqltutorial.org/mysql-adjacency-list-tree/ */
+/* Idea taken from: https://www.mysqltutorial.org/mysql-adjacency-list-tree/ */
 
 /* Finding all nodes */
 SELECT id, parent_id, title
 FROM category
 
 
-/* Finding the root nodes */
-SELECT id, title
+/* Finding the main categories*/
+SELECT *
 FROM category
-WHERE parent_id IS NULL;
+WHERE user_id = 1 AND parent_id IS NULL;
 
 
-/* Finding children */
-SELECT id, title
+/* Finding sub-categories */
+SELECT *
 FROM category
-WHERE parent_id != 1;
+WHERE user_id = 1 AND parent_id IS NOT NULL;
 
 /* Querying the whole tree  */
 WITH RECURSIVE category_path (id, title, path) AS
