@@ -4,7 +4,7 @@
 
 ### What's this?
 
-This is an app to *manually* control expenses. General idea is:
+This is an app to *manually* track expenses. General idea is:
 
 * Create categories
 * Store expenses
