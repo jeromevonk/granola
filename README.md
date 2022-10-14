@@ -12,6 +12,8 @@ This is an app to *manually* track expenses. General idea is:
 * Search for expenses
 * Generate reports and charts about monthly/yearly expenses
 
+There is a little more information on this [article](https://www.codeproject.com/Articles/5342947/Track-Your-Expenses-with-this-Next-js-React-App).
+
 ### What it's not
 
 This app **will not** automatically integrate with your bank and retrieve your expenses.
